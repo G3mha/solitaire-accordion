@@ -1,14 +1,5 @@
-def cria_baralho():
-    import random as rand
-    lista_naipes = ['♠', '♣', '♦', '♥']
-    lista_numeros = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
-    lista_cartas = []
-    for naipe in lista_naipes:
-        for numero in lista_numeros:
-            carta = numero + naipe
-            lista_cartas.append(carta)
-    rand.shuffle(lista_cartas)
-    return lista_cartas
+import random
+import mecanicas
 
 interrupitor = True
 
@@ -17,7 +8,7 @@ while interrupitor == True:
     a = input('')
     if a == '':
         print('O estado atual do baralho é:')
-    baralho = cria_baralho()
+    baralho = mecanicas.cria_baralho()
     for i in range(len(baralho)):
         print('{0}. {1}'.format((i+1), baralho[i]))
     interrupitor = False
