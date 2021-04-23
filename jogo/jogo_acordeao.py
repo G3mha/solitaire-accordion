@@ -10,13 +10,19 @@ while interrupitor == True:
         baralho = mecanicas.cria_baralho()
         pode_mover = True
         while pode_mover == True:
-            lista_numeros = range(1, len(baralho))
+            pode_mover = mecanicas.possui_movimentos_possiveis(baralho)
+            if pode_mover == False:
+                break
+            lista_numeros = range(1, len(baralho)+1)
             print('O estado atual do baralho é:')
             for i in range(max(lista_numeros)):
                 ind = lista_numeros[i]
                 cart = baralho[i]
                 print('{0}. {1}'.format(ind, cart))
-            index_selec = int(input('Escolha uma carta (digite um número entre 1 e {}): '.format(max(lista_numeros)))) - 1
+            k = input('Escolha uma carta (digite um número entre 1 e {}): '.format(max(lista_numeros)))
+            while k not in range(1, 53):
+                k = input('Posição inválida. Por favor, digite um número entre 1 e {}): '.format(max(lista_numeros)))
+            index_selec = int(k) - 1
             lista_mov = mecanicas.lista_movimentos_possiveis(baralho, index_selec)
             carta_selec = baralho[index_selec]
             while lista_mov == []:
@@ -40,7 +46,6 @@ while interrupitor == True:
                     baralho = mecanicas.empilha(baralho, index_selec, (index_selec-1))
                 if numero_digitado == 2:
                     baralho = mecanicas.empilha(baralho, index_selec, (index_selec-3))
-            pode_mover = mecanicas.possui_movimentos_possiveis(baralho)
         if len(baralho) == 1:
             print('Parabéns você venceu!')
         else:
