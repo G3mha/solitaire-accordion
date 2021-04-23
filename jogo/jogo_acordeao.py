@@ -17,29 +17,29 @@ while interrupitor == True:
                 cart = baralho[i]
                 print('{0}. {1}'.format(ind, cart))
             index_selec = int(input('Escolha uma carta (digite um número entre 1 e {}): '.format(max(lista_numeros)))) - 1
+            lista_mov = mecanicas.lista_movimentos_possiveis(baralho, index_selec)
             carta_selec = baralho[index_selec]
-            lista_mov = funcoes.lista_movimentos_possiveis(baralho, carta_selec)
             while lista_mov == []:
-                index_selec = input('Movimento não permitido, por favor insira um número de 1 a {}'.format(max(lista_numeros)))
+                index_selec = int(input('Movimento não permitido, por favor insira um número de 1 a {}: '.format(max(lista_numeros)))) - 1
                 carta_selec = baralho[index_selec]
-                lista_mov = funcoes.lista_movimentos_possiveis(baralho, carta_selec)
+                lista_mov = mecanicas.lista_movimentos_possiveis(baralho, index_selec)
             if lista_mov == [1]:
-                carta_ant = baralho[posicao-1]
-                baralho = funcoes.empilha(baralho, index_selec, carta_ant)
+                carta_ant = baralho[index_selec-1]
+                baralho = mecanicas.empilha(baralho, index_selec, (index_selec-1))
             if lista_mov == [3]:
-                carta_terc_ant = baralho[posicao-3]
-                baralho = funcoes.empilha(baralho, index_selec, carta_terc_ant)
+                carta_terc_ant = baralho[index_selec-3]
+                baralho = mecanicas.empilha(baralho, index_selec, (index_selec-3))
             if lista_mov == [1, 3]:
-                carta_ant = baralho[posicao-1]
-                carta_terc_ant = baralho[posicao-3]
+                carta_ant = baralho[index_selec-1]
+                carta_terc_ant = baralho[index_selec-3]
                 print('Sobre qual carta você quer empilhar o {}?'.format(carta_selec))
                 print('1. {}'.format(carta_ant))
                 print('2. {}'.format(carta_terc_ant))
                 numero_digitado = int(input('Digite 1 ou 2: '))
                 if numero_digitado == 1:
-                    baralho = funcoes.empilha(baralho, index_selec, carta_ant)
+                    baralho = mecanicas.empilha(baralho, index_selec, (index_selec-1))
                 if numero_digitado == 2:
-                    baralho = funcoes.empilha(baralho, index_selec, carta_terc_ant)
+                    baralho = mecanicas.empilha(baralho, index_selec, (index_selec-3))
             pode_mover = mecanicas.possui_movimentos_possiveis(baralho)
         if len(baralho) == 1:
             print('Parabéns você venceu!')
